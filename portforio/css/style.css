@@ -889,8 +889,9 @@ p:last-child {
 .p-worksCard__thumb {
   aspect-ratio: 16 / 10;
   background-color: var(--gray1);
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
+  display: block;
 }
 
 .p-worksCard__body {
@@ -967,6 +968,62 @@ p:last-child {
   font-size: 0.9375rem;
   line-height: 1.8;
   color: var(--text-color);
+}
+
+/* 実際の動作画面スクショ（横並び） */
+.p-workDetail__sectionNote {
+  font-size: 0.875rem;
+  color: var(--gray2);
+  margin-bottom: var(--space-lg);
+}
+
+.p-workDetail__screenshots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.p-workDetail__screenshots li {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.p-workDetail__screenshots img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid var(--gray1);
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
+}
+
+.p-workDetail__downloadList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+}
+
+.p-workDetail__downloadList li {
+  margin-bottom: var(--space-sm);
+}
+
+.p-workDetail__downloadList li:last-child {
+  margin-bottom: 0;
+}
+
+.p-workDetail__downloadList a {
+  color: var(--sub-color2);
+  text-decoration: underline;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.p-workDetail__downloadList a:hover {
+  color: #d35400;
 }
 
 .p-workDetail__back {
