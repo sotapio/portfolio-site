@@ -1026,6 +1026,16 @@ p:last-child {
   color: #d35400;
 }
 
+.p-workDetail__externalLink {
+  color: var(--sub-color2);
+  text-decoration: underline;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.p-workDetail__externalLink:hover {
+  color: #d35400;
+}
+
 .p-workDetail__back {
   display: inline-block;
   margin-top: var(--space-2xl);
