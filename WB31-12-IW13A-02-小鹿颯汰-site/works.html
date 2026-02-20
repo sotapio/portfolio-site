@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="制作実績一覧。Webアプリ・LP・コーポレートサイトなどのポートフォリオです。">
+  <title>Works（制作実績） | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="l-header" id="js-header" role="banner">
+    <div class="l-header__inner">
+      <a href="index.html" class="l-header__logo">Portfolio</a>
+      <nav class="l-header__nav" id="js-nav" aria-label="メインナビゲーション">
+        <ul class="l-header__navList">
+          <li><a href="about.html" class="l-header__navLink">About</a></li>
+          <li><a href="works.html" class="l-header__navLink">Works</a></li>
+          <li><a href="vision.html" class="l-header__navLink">Vision</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="l-header__trigger" id="js-trigger" aria-expanded="false" aria-controls="js-nav" aria-label="メニューを開く">
+        <span class="l-header__triggerLine"></span>
+        <span class="l-header__triggerLine"></span>
+        <span class="l-header__triggerLine"></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="l-main" role="main">
+    <div class="l-main__inner">
+      <h1 class="c-pageTitle heading--en u-fadeIn">Works</h1>
+      <p class="p-works__lead u-fadeIn">
+        これまでに携わった制作物の一部です。プロジェクトの背景・担当範囲・アプローチは各詳細ページでご覧いただけます。
+      </p>
+
+      <div class="p-works__grid">
+        <article class="p-worksCard u-fadeIn">
+          <a href="works-detail.html#home-log" class="p-worksCard__link">
+            <img src="https://placehold.co/800x500/F4F7F6/5D6D7E?text=Home-LOG" alt="家具家電アプリ Home-LOG のサムネイル" class="p-worksCard__thumb" width="800" height="500">
+            <div class="p-worksCard__body">
+              <h2 class="p-worksCard__title">家具家電アプリ Home-LOG</h2>
+              <p class="p-worksCard__tech">HTML / CSS / JavaScript</p>
+            </div>
+          </a>
+        </article>
+        <article class="p-worksCard u-fadeIn">
+          <a href="works-detail.html#cajica" class="p-worksCard__link">
+            <img src="https://placehold.co/800x500/F4F7F6/5D6D7E?text=cajica" alt="電子名刺アプリ cajica のサムネイル" class="p-worksCard__thumb" width="800" height="500">
+            <div class="p-worksCard__body">
+              <h2 class="p-worksCard__title">電子名刺アプリ cajica</h2>
+              <p class="p-worksCard__tech">HTML / CSS / JavaScript</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="l-footer" role="contentinfo">
+    <div class="l-footer__inner">
+      <nav class="l-footer__nav" aria-label="フッターナビゲーション">
+        <ul class="l-footer__navList">
+          <li><a href="index.html" class="l-footer__navLink">Top</a></li>
+          <li><a href="about.html" class="l-footer__navLink">About</a></li>
+          <li><a href="works.html" class="l-footer__navLink">Works</a></li>
+          <li><a href="vision.html" class="l-footer__navLink">Vision</a></li>
+        </ul>
+      </nav>
+      <p class="l-footer__copy">&copy; 2025 Portfolio. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="フロントエンドエンジニアのポートフォリオサイト。ストーリーとビジョンでポテンシャルをお伝えします。">
+  <title>Portfolio | フロントエンドエンジニア</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="l-header is-transparent" id="js-header" role="banner">
+    <div class="l-header__inner">
+      <a href="index.html" class="l-header__logo">Portfolio</a>
+      <nav class="l-header__nav" id="js-nav" aria-label="メインナビゲーション">
+        <ul class="l-header__navList">
+          <li><a href="about.html" class="l-header__navLink">About</a></li>
+          <li><a href="works.html" class="l-header__navLink">Works</a></li>
+          <li><a href="vision.html" class="l-header__navLink">Vision</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="l-header__trigger" id="js-trigger" aria-expanded="false" aria-controls="js-nav" aria-label="メニューを開く">
+        <span class="l-header__triggerLine"></span>
+        <span class="l-header__triggerLine"></span>
+        <span class="l-header__triggerLine"></span>
+      </button>
+    </div>
+  </header>
+  <main class="p-firstView" role="main">
+    <div class="p-firstView__inner">
+      <p class="p-firstView__catch heading--en">
+        Portfolio
+      </p>
+      <nav class="p-firstView__nav" aria-label="メインナビゲーション">
+        <a href="about.html" class="p-firstView__navLink">About</a>
+        <a href="works.html" class="p-firstView__navLink">Works</a>
+        <a href="vision.html" class="p-firstView__navLink p-firstView__navLink--primary">Vision</a>
+      </nav>
+      <div class="p-firstView__external" aria-label="外部リンク">
+        <a href="https://github.com/" class="p-firstView__externalLink" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="#" class="p-firstView__externalLink" target="_blank" rel="noopener noreferrer">Qiita</a>
+        <a href="#" class="p-firstView__externalLink" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+      </div>
+    </div>
+  </main>
+  <footer class="l-footer" role="contentinfo">
+    <div class="l-footer__inner">
+      <nav class="l-footer__nav" aria-label="フッターナビゲーション">
+        <ul class="l-footer__navList">
+          <li><a href="index.html" class="l-footer__navLink">Top</a></li>
+          <li><a href="about.html" class="l-footer__navLink">About</a></li>
+          <li><a href="works.html" class="l-footer__navLink">Works</a></li>
+          <li><a href="vision.html" class="l-footer__navLink">Vision</a></li>
+        </ul>
+      </nav>
+      <p class="l-footer__copy">&copy; 2025 Portfolio. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
