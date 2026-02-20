@@ -104,6 +104,103 @@
   }
 
   /**
+   * ファーストビュー背景ドット：マウスに寄る動き
+   */
+  function initFirstViewDots() {
+    const container = document.getElementById('js-firstView-dots');
+    const bg = container && container.closest('.p-firstView__bg');
+    if (!container || !bg) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const SPACING = 28; /* 小さくするほどドット数が増える（32→20 で約2.5倍、16 で約4倍） */
+    const DOT_SIZE = 4;
+    const ATTRACT_RADIUS = 360;
+    const MAX_MOVE = 480;
+    const dots = [];
+    let mouseX = null;
+    let mouseY = null;
+    let rafId = null;
+
+    function createDots() {
+      const w = container.offsetWidth;
+      const h = container.offsetHeight;
+      const cols = Math.ceil(w / SPACING) + 1;
+      const rows = Math.ceil(h / SPACING) + 1;
+      container.innerHTML = '';
+      dots.length = 0;
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const cx = col * SPACING + SPACING / 2;
+          const cy = row * SPACING + SPACING / 2;
+          const el = document.createElement('span');
+          el.className = 'p-firstView__dot';
+          el.style.left = (cx - DOT_SIZE / 2) + 'px';
+          el.style.top = (cy - DOT_SIZE / 2) + 'px';
+          container.appendChild(el);
+          dots.push({ el: el, cx: cx, cy: cy });
+        }
+      }
+      bg.classList.add('has-dots');
+    }
+
+    function updateDots() {
+      if (mouseX === null || mouseY === null) {
+        dots.forEach(function (d) {
+          d.el.style.transform = 'translate(0, 0)';
+        });
+        return;
+      }
+      dots.forEach(function (d) {
+        const dx = mouseX - d.cx;
+        const dy = mouseY - d.cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < ATTRACT_RADIUS && dist > 0) {
+          const t = 1 - dist / ATTRACT_RADIUS;
+          const move = MAX_MOVE * t * t;
+          const ox = (dx / dist) * move;
+          const oy = (dy / dist) * move;
+          d.el.style.transform = 'translate(' + ox + 'px, ' + oy + 'px)';
+        } else {
+          d.el.style.transform = 'translate(0, 0)';
+        }
+      });
+    }
+
+    function onFrame() {
+      rafId = null;
+      updateDots();
+    }
+
+    function onMouseMove(e) {
+      const rect = container.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(onFrame);
+      }
+    }
+
+    function onMouseLeave() {
+      mouseX = null;
+      mouseY = null;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(onFrame);
+      }
+    }
+
+    createDots();
+    const firstView = container.closest('.p-firstView');
+    if (firstView) {
+      firstView.addEventListener('mousemove', onMouseMove, { passive: true });
+      firstView.addEventListener('mouseleave', onMouseLeave);
+    }
+    window.addEventListener('resize', function () {
+      createDots();
+    });
+  }
+
+  /**
    * 現在ページのナビに .is-current を付与
    */
   function setCurrentNav() {
@@ -127,6 +224,7 @@
     initHamburger();
     initHeaderScroll();
     initFadeIn();
+    initFirstViewDots();
     setCurrentNav();
   }
 

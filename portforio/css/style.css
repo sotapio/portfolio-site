@@ -107,6 +107,7 @@ p:last-child {
    Layout - ファーストビュー（Top Page 用）
    -------------------------------------------------------------------------- */
 .p-firstView {
+  position: relative;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
@@ -117,9 +118,77 @@ p:last-child {
   background-color: var(--main-color);
   color: var(--white);
   text-align: center;
+  overflow: hidden;
+}
+
+/* 背景レイヤー：グラデーション＋微かなパターンで奥行き */
+.p-firstView__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(165deg,
+      var(--main-color) 0%,
+      #1a252f 40%,
+      #243342 70%,
+      var(--main-color) 100%);
+  background-size: 100% 100%;
+}
+
+/* ドットパターン（濃く・大きく）。JS 無効時はこのみ表示 */
+.p-firstView__bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 2px, transparent 2px);
+  background-size: 32px 32px;
+  animation: p-firstView__bgShift 20s ease-in-out infinite;
+}
+
+/* JS でドットを生成したときは ::before を非表示 */
+.p-firstView__bg.has-dots::before {
+  display: none;
+}
+
+/* インタラクティブなドット用レイヤー */
+.p-firstView__dots {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.p-firstView__dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.14);
+  transition: transform 0.18s ease-out;
+  will-change: transform;
+}
+
+/* オレンジのグラデーション光（一角にアクセント） */
+.p-firstView__bg::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(230, 126, 34, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes p-firstView__bgShift {
+  0%, 100% { opacity: 1; transform: translate(0, 0); }
+  50% { opacity: 0.8; transform: translate(2%, 1%); }
 }
 
 .p-firstView__inner {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 36rem;
   margin: 0 auto;
@@ -131,7 +200,27 @@ p:last-child {
   font-weight: 600;
   letter-spacing: 0.05em;
   line-height: 1.4;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: p-firstView__catchIn 0.8s var(--ease-out) 0.2s forwards;
+}
+
+.p-firstView__lead {
+  font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: var(--space-3xl);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: p-firstView__catchIn 0.7s var(--ease-out) 0.5s forwards;
+}
+
+@keyframes p-firstView__catchIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .p-firstView__nav {
@@ -153,7 +242,9 @@ p:last-child {
   border-radius: 4px;
   transition: background-color var(--duration-normal) var(--ease-out),
               border-color var(--duration-normal) var(--ease-out),
-              color var(--duration-normal) var(--ease-out);
+              color var(--duration-normal) var(--ease-out),
+              transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
 }
 
 .p-firstView__navLink:hover,
@@ -161,6 +252,8 @@ p:last-child {
   background-color: var(--white);
   border-color: var(--white);
   color: var(--main-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .p-firstView__navLink--primary {
@@ -174,6 +267,20 @@ p:last-child {
   background-color: #d35400;
   border-color: #d35400;
   color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(230, 126, 34, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-firstView__bg::before {
+    animation: none;
+  }
+  .p-firstView__catch,
+  .p-firstView__lead {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .p-firstView__external {
@@ -229,10 +336,10 @@ p:last-child {
   box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
 }
 
-/* トップページ用：ファーストビュー上で透明 */
+/* トップページ用：ファーストビュー上はメイン色の半透明背景 */
 .l-header.is-transparent {
-  background-color: transparent;
-  border-bottom-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(44, 62, 80, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.15);
 }
 
 .l-header.is-transparent .l-header__logo {
@@ -945,8 +1052,19 @@ p:last-child {
 }
 
 /* --------------------------------------------------------------------------
-   Utility - フェードイン（JSで .is-visible を付与）
+   Utility - 表示切り替え・フェードイン
    -------------------------------------------------------------------------- */
+/* スマホのみ改行を有効にする */
+br.u-spOnly {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  br.u-spOnly {
+    display: inline;
+  }
+}
+
 .u-fadeIn {
   opacity: 0;
   transform: translateY(16px);
