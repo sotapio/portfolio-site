@@ -211,10 +211,11 @@
       const href = link.getAttribute('href');
       const isIndex = fileName === '' || fileName === 'index.html';
       const isAbout = href === 'about.html' && fileName === 'about.html';
+      const isProfile = href === 'profile.html' && fileName === 'profile.html';
       const isWorks = (href === 'works.html' && (fileName === 'works.html' || fileName.indexOf('works-detail') === 0));
       const isVision = href === 'vision.html' && fileName === 'vision.html';
       const isTop = href === 'index.html' && isIndex;
-      if (isTop || isAbout || isWorks || isVision) {
+      if (isTop || isAbout || isProfile || isWorks || isVision) {
         link.classList.add('is-current');
       }
     });
