@@ -590,6 +590,7 @@ p:last-child {
    Page - About（STORY / 経歴）
    -------------------------------------------------------------------------- */
 .p-about__lead {
+  padding-bottom: var(--space-2xl);
   font-size: 1.125rem;
   line-height: 1.8;
   margin-bottom: var(--space-3xl);
@@ -842,6 +843,7 @@ p:last-child {
    Page - Works（制作実績一覧）
    -------------------------------------------------------------------------- */
 .p-works__lead {
+  padding-bottom: var(--space-2xl);
   font-size: 1rem;
   color: var(--sub-color1);
   margin-bottom: var(--space-2xl);
@@ -1067,6 +1069,7 @@ p:last-child {
   font-weight: 600;
   margin-bottom: var(--space-3xl);
   padding: var(--space-lg) var(--space-xl);
+  
   padding-left: var(--space-xl);
   border-left: 4px solid var(--sub-color2);
   background-color: rgba(230, 126, 34, 0.06);
@@ -1078,6 +1081,7 @@ p:last-child {
 }
 
 .p-vision__sectionTitle {
+  padding-top: var(--space-2xl);
   font-family: var(--font-en-heading);
   font-size: clamp(1.25rem, 3vw, 1.5rem);
   font-weight: 600;

@@ -41,7 +41,8 @@ const SKILLS = {
     { icon: `${CDN}/photoshop/photoshop-plain.svg`, name: 'Adobe Photoshop' },
   ],
   others: [
-    { icon: `${CDN}/instagram/instagram-original.svg`, name: 'Instagram' },
+    /* devicons の Instagram が取得できないため Simple Icons を使用 */
+    { icon: 'https://cdn.simpleicons.org/instagram', name: 'Instagram' },
     { icon: `${CDN}/twitter/twitter-original.svg`, name: 'X (Twitter)' },
     { icon: `${CDN}/google/google-original.svg`, name: 'Gmail' },
     { icon: `${CDN}/notion/notion-original.svg`, name: 'Notion' },
