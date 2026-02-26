@@ -1,1 +1,5 @@
+# Dependencies
 node_modules
+
+# Next.js build output and cache (自動生成・コミット不要)
+.next
