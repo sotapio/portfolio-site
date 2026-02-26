@@ -1119,6 +1119,116 @@ p:last-child {
 }
 
 /* --------------------------------------------------------------------------
+   Page - Profile（プロフィール）
+   -------------------------------------------------------------------------- */
+/* 他ページ（Vision 等）同様、コンテンツを中央に */
+.p-profile .l-main__inner {
+  max-width: 720px;
+}
+
+.p-profile__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-3xl);
+}
+
+@media (min-width: 600px) {
+  .p-profile__header {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-2xl);
+  }
+}
+
+.p-profile__photo {
+  flex-shrink: 0;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--gray1);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
+}
+
+@media (min-width: 600px) {
+  .p-profile__photo {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.p-profile__name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--main-color);
+  margin: 0 0 var(--space-md);
+  letter-spacing: 0.02em;
+}
+
+.p-profile__meta {
+  margin: 0;
+}
+
+.p-profile__meta dt {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--sub-color1);
+  margin-bottom: var(--space-xs);
+}
+
+.p-profile__meta dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.p-profile__section {
+  margin-bottom: var(--space-2xl);
+}
+
+.p-profile__sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--sub-color1);
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.02em;
+}
+
+.p-profile__sectionBody {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.p-profile__bandLogos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.p-profile__bandLogoLink {
+  display: block;
+  line-height: 0;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.p-profile__bandLogoLink:hover {
+  transform: scale(1.05);
+}
+
+.p-profile__bandLogo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
+
+/* --------------------------------------------------------------------------
    Utility - 表示切り替え・フェードイン
    -------------------------------------------------------------------------- */
 /* スマホのみ改行を有効にする */
