@@ -1,20 +1,65 @@
 # portfolio-site
 
-フロントエンドエンジニアのポートフォリオサイトです。
+フロントエンドエンジニアのポートフォリオサイトです。  
+Next.js（App Router）で構築しています。
 
-## Next.js 版（推奨）
+## 環境
 
-**`next-app/`** に Next.js（App Router）でリプレイスした版があります。
+- **Node.js** … 推奨は 20.x 以上
+- **パッケージマネージャ** … npm / pnpm など
+
+## セットアップ
 
 ```bash
-cd next-app
 npm install
-npm run dev
+# または
+pnpm install
 ```
 
-詳細は [next-app/README.md](next-app/README.md) を参照してください。
+## 開発サーバー
 
-## 静的 HTML 版（従来）
+```bash
+npm run dev
+# または
+pnpm run dev
+```
 
-**`portforio/`** に静的 HTML/CSS/JS の従来版があります。  
-ブラウザで `portforio/index.html` を開くか、任意のローカルサーバーで配信してください。
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてください。
+
+## ビルド・本番起動
+
+```bash
+npm run build
+npm start
+```
+
+## プロジェクト構成
+
+| 場所 | 内容 |
+|------|------|
+| `src/app/` | ページ（`page.tsx`）とレイアウト（`layout.tsx`） |
+| `src/components/` | 共通コンポーネント（Header, Footer, FadeIn, FirstViewDots） |
+| `src/app/globals.css` | グローバルスタイル（FLOCSS/BEM） |
+| `public/assets/images/` | 画像（Works サムネイル・スクショ、Profile 写真・バンドロゴなど） |
+
+- **フォント**: Google Fonts（Noto Sans JP, Montserrat, Roboto）を `<link>` で読み込み
+
+## ルート一覧
+
+| パス | 内容 |
+|------|------|
+| `/` | トップ（ファーストビュー・ドット背景） |
+| `/about` | About（STORY・SKILL） |
+| `/profile` | Profile |
+| `/works` | Works 一覧 |
+| `/works/detail` | Works 詳細（#home-log, #cajica） |
+| `/vision` | Vision |
+
+## 画像について
+
+`public/assets/images/` に以下を配置しています。
+
+- Works: `banner_main_kiwimaru.png`, `IMG_5127.png` ～ `IMG_5130.png`
+- Profile: `face.jpg`, `Maki.png`, `ORAL.png`, `SiM.png`
+
+追加・差し替え時は同じフォルダに置いてください。
