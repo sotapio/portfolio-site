@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy PHP app to Azure Web App - hal-nh-web-iw14a02
+name: Build and deploy Node.js app to Azure Web App - hal-nh-web-iw14a02
 
 on:
   push:
@@ -18,26 +18,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      # 1. Node.js環境のセットアップ（Azureのバージョン v24.15.0 に合わせています）
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          php-version: '8.5'
+          node-version: '20' # 安定版のNode 20を指定（必要に応じて22や24に変更可能）
+          cache: 'npm'
 
-      - name: Check if composer.json exists
-        id: check_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: 'composer.json'
+      # 2. パッケージのインストールとNext.jsのビルド
+      - name: Install dependencies and build
+        run: |
+          npm ci
+          npm run build
 
-      - name: Run composer install if composer.json exists
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
-
-
+      # 3. ビルドされた成果物を一時保存（アップロード）
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: php-app
+          name: node-app
           path: .
 
   deploy:
@@ -48,11 +46,12 @@ jobs:
       contents: read #This is required for actions/checkout
 
     steps:
+      # 4. ビルド成果物のダウンロード
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: php-app
-      
+          name: node-app
+          
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -67,4 +66,3 @@ jobs:
           app-name: 'hal-nh-web-iw14a02'
           slot-name: 'Production'
           package: .
-          
