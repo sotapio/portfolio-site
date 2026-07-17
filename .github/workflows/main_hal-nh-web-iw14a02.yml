@@ -27,7 +27,7 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # すべてのファイル（.next フォルダや node_modules を含む）をデプロイ対象としてアップロード
+      # すべてのフォルダを丸ごとアップロードするように修正（エラー箇所を削除）
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
