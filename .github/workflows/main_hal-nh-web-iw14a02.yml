@@ -27,18 +27,12 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # スタンドアロンビルドに必要なファイル（.next/standalone）だけをデプロイ用にまとめる
-      - name: Copy static files to standalone
-        run: |
-          cp -R public .next/standalone/public
-          cp -R .next/static .next/standalone/.next/static
-
-      # デプロイ対象を.next/standalone配下のファイルに絞ってアップロード
+      # すべてのファイル（.next フォルダや node_modules を含む）をデプロイ対象としてアップロード
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .next/standalone
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
