@@ -27,12 +27,15 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # すべてのフォルダを丸ごとアップロードするように修正（エラー箇所を削除）
+      # 【修正】デプロイに必要なファイル（隠しフォルダ.nextを含む）を明示的にzipにまとめる
+      - name: Zip artifact for deployment
+        run: zip -r release.zip . -x ".git/*" ".github/*"
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -54,10 +57,11 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_AF8EC5E60A154CADA957EF38142E6749 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_34C388CBB3FF4409B8764693F88DF40F }}
 
+      # 【修正】zipパッケージを直接指定してデプロイ
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'hal-nh-web-iw14a02'
           slot-name: 'Production'
-          package: .
+          package: release.zip
